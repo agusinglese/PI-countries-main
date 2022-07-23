@@ -17,12 +17,19 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require('./src/app.js');
-const { conn } = require('./src/db.js');
+const server = require("./src/app.js");
+const { conn } = require("./src/db.js");
 
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+    console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
+
+/*
+models --> se comunica con la base de datos
+rutas --> es la puerta de entrada de la api
+las tutas tienen que llamar a un controlador
+controller --> intermediario entre rutas y base de datos
+*/
