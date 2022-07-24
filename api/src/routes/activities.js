@@ -6,11 +6,10 @@ const { Activity, Country } = require("../db.js");
 //FALTA RELACIONARLA CON LOS PAISES
 router.post("/", async (req, res) => {
   const { name, difficulty, season, duration, countries } = req.body;
-  console.log(name, difficulty, season, duration);
-  if (!name || !duration || !difficulty || !season) {
+  if (!name || !duration || !difficulty || !season || !countries.length) {
     res.status(404).send("Incomplete data");
   }
-  console.log(countries);
+
   try {
     const [newActivity, created] = await Activity.findOrCreate({
       where: {
@@ -29,12 +28,12 @@ router.post("/", async (req, res) => {
 
     res.status(200).send(newActivity);
   } catch (e) {
-    res.send(e);
+    res.send(`sor error${e}`);
   }
 });
 
 router.get("/", async (req, res) => {
-  const activity = await Activity.findAll();
+  const activity = await Activity.findAll({ include: { model: Country } });
   res.send(activity);
 });
 

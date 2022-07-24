@@ -1,7 +1,6 @@
 .App {
   text-align: center;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -24,6 +23,9 @@
   color: white;
 }
 
+body {
+  margin: 0;
+}
 .App-link {
   color: #61dafb;
 }

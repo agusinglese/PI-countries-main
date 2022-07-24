@@ -18,7 +18,7 @@ const getAPI = async () => {
       name: e.name.common,
       flag: e.flags.png,
       continent: e.continents[0],
-      capital: e.capital || "Not available",
+      capital: e.capital ? e.capital[0] : "Not available",
       subregion: e.subregion,
       area: e.area,
       population: e.population,

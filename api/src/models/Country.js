@@ -9,7 +9,6 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     id: { type: DataTypes.STRING(3), primaryKey: true },
-    //CONSULTAR DATATYPES FLAG
     flag: { type: DataTypes.STRING, allowNull: false },
     continent: { type: DataTypes.STRING, allowNull: false },
     capital: { type: DataTypes.STRING, allowNull: false },
