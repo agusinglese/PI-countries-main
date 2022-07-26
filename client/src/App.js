@@ -8,6 +8,7 @@ import Header from "./components/header/Header";
 import Error from "./components/error/Error";
 import GlobalStyle from "./components/GlobalStyled";
 import Footer from "./components/footer/Footer";
+import Activities from "./components/Activities";
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
           <Route exact path="/country/:id" component={CountryDetails} />
           <Route exact path="/activities">
             <Activity />
+          </Route>
+          <Route exact path="/activity">
+            <Activities />
           </Route>
           <Route path="*">
             <Error />

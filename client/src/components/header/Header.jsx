@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const HeaderStyle = styled.div`
   background-color: #282c34;
-  min-height: 15vh;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: start;

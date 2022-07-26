@@ -1,25 +1,33 @@
 import styled from "styled-components";
 
 const UlTag = styled.ul`
-  display: inline-block;
+  display: inline;
   padding: 0;
-  margin: 0;
 `;
 
 const LiTag = styled.li`
-  display: inline;
-  color: black;
+  color: ${(props) => (props.color ? "white" : "black")};
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   list-style: none;
   border-radius: 0.3rem;
-  background-color: ${(props) => (props.activeClass ? "black" : "none")};
+  border: 1px solid gray;
+  cursor: pointer;
+  background-color: ${(props) => (props.color ? "black" : "none")};
 `;
 
 const Img = styled.img`
   width: 10px;
   height: 10px;
+`;
+
+const DivTag = styled.div`
+  margin: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 function Paginated({
@@ -29,6 +37,8 @@ function Paginated({
   currentPage,
   nextHandler,
   prevHandler,
+  firstHandler,
+  lastHandler,
 }) {
   let pageNumbers = [];
   let totalPages = Math.ceil(totalCountries / countriesPage);
@@ -42,7 +52,10 @@ function Paginated({
   );
 
   return (
-    <>
+    <DivTag>
+      {currentPage > 1 && (
+        <button onClick={() => firstHandler()}>Primera</button>
+      )}
       {currentPage > 1 && (
         <button onClick={() => prevHandler()}>
           <Img
@@ -55,15 +68,20 @@ function Paginated({
       <UlTag>
         {visibleNumbers &&
           visibleNumbers.map((number, index) => (
-            <LiTag key={index}>
-              <a onClick={() => pagine(number)}>{number}</a>
-            </LiTag>
+            <a onClick={() => pagine(number)}>
+              <LiTag key={index} color={number === currentPage}>
+                {number}
+              </LiTag>
+            </a>
           ))}
       </UlTag>
       {currentPage !== totalPages && (
-        <button onClick={() => nextHandler()}>>></button>
+        <button onClick={() => nextHandler()}>Next</button>
       )}
-    </>
+      {currentPage !== totalPages && (
+        <button onClick={() => lastHandler()}>Ultima</button>
+      )}
+    </DivTag>
   );
 }
 

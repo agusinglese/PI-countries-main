@@ -1,4 +1,7 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+import { searchById } from "../../actions";
 
 const DivTag = styled.div`
   border: 1px solid black;
@@ -34,8 +37,18 @@ const Title = styled.h3`
   margin-top: 0;
   margin-bottom: 0.1rem;
 `;
+
+const Img = styled.img`
+  width: 3rem;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 3px;
+`;
+
 function ActivityCard({ dataActivity }) {
   const { name, duration, difficulty, season } = dataActivity;
+
   return (
     <Conteiner>
       <DivTag>

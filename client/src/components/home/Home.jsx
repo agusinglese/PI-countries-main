@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Paginated from "../paginated/Paginated";
 import { usePaginated } from "../../hooks/usePaginated";
 import styled from "styled-components";
+import Loader from "../Loader";
 
 const DivTagCards = styled.div`
   display: flex;
@@ -40,6 +41,7 @@ function Home() {
   const dispatch = useDispatch();
   const [filterActive, setFilterActive] = useState(false);
   const [order, setOrder] = useState("");
+  const [loading, setLoading] = useState(false);
   const {
     positionOfTheFirstCountry,
     positionOfTheLastCountry,
@@ -49,17 +51,20 @@ function Home() {
     currentPage,
     prevHandler,
     nextHandler,
+    firstHandler,
+    lastHandler,
   } = usePaginated(countries);
 
   const currentCountries = countries.slice(
     positionOfTheFirstCountry,
     positionOfTheLastCountry
   );
-  //const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     dispatch(getAllCountries());
     dispatch(getActivities());
+    setLoading(false);
   }, [dispatch]);
 
   const handleFilterContinent = (e) => {
@@ -91,6 +96,9 @@ function Home() {
 
   const handleBack = () => {
     setFilterActive(false);
+    dispatch(getAllCountries());
+    dispatch(getActivities());
+    setCurrentPage(1);
   };
   return (
     <div>
@@ -125,7 +133,7 @@ function Home() {
                   <option value="All">All activities</option>
                   {activities &&
                     activities.map((act, index) => (
-                      <option key={index} value={act.name}>
+                      <option key={index} value={act.id}>
                         {act.name}
                       </option>
                     ))}
@@ -164,7 +172,7 @@ function Home() {
           </DivTagCards>
         </div>
       </div>
-
+      {loading && <Loader />}
       <Paginated
         totalCountries={countries.length}
         countriesPage={countriesPage}
@@ -172,13 +180,11 @@ function Home() {
         currentPage={currentPage}
         prevHandler={prevHandler}
         nextHandler={nextHandler}
+        firstHandler={firstHandler}
+        lastHandler={lastHandler}
       />
       <div>
-        {filterActive && (
-          <a href="http://localhost:3000/home">
-            <button onClick={() => handleBack()}>Back</button>
-          </a>
-        )}
+        {filterActive && <button onClick={() => handleBack()}>Back</button>}
         <DivTagCards>
           {currentCountries &&
             currentCountries.map((country) => (

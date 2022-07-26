@@ -11,6 +11,10 @@ const DivTag = styled.div`
   margin: 1rem;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  &:hover {
+    background-color: whitesmoke;
+  }
 `;
 
 const ImgTag = styled.img`
@@ -20,11 +24,24 @@ const ImgTag = styled.img`
   border-radius: 4px;
   padding: 5px;
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+    color: #444;
+  }
+`;
+
 function CountryCard({ data }) {
   const { id, flag, continent, name } = data;
   return (
     <DivTag>
-      <Link to={`/country/${id}`}>
+      <StyledLink to={`/country/${id}`}>
         <div>
           <ImgTag src={flag} alt="flag" />
         </div>
@@ -36,7 +53,7 @@ function CountryCard({ data }) {
             <p>{continent}</p>
           </div>
         </div>
-      </Link>
+      </StyledLink>
     </DivTag>
   );
 }

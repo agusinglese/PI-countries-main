@@ -84,6 +84,7 @@ label{
   
 }
 
+
 `;
 
 export default GlobalStyle;

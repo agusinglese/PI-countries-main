@@ -17,13 +17,14 @@ const Conjunto = styled.div`
 
 const DivTag = styled.div`
   align-items: baseline;
+  justify-items: space-evenly;
   padding: 0.1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 `;
 
 const Div2Tag = styled.form`
-  width: 25vw;
+  width: 20vw;
 `;
 
 const Buttons = styled.div`
@@ -142,7 +143,7 @@ function Activity() {
           {errors.name && <p style={style}>{errors.name}</p>}
         </DivTag>
         <DivTag>
-          <label>Duration(hrs): </label>
+          <label>Duration (hrs): </label>
           <input
             type="number"
             name="duration"

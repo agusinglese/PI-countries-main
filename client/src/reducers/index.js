@@ -33,13 +33,27 @@ export const rootReducer = (state = initialState, action) => {
       return { ...state, countries: action.payload };
     }
     case SEARCH_BY_ACTIVITY: {
-      let searchCountry = state.activities.filter(
-        (e) => e.name === action.payload
-      );
-      console.log(searchCountry);
+      let array = [];
+      if (action.payload !== "All") {
+        let newCountries = state.allCountries;
+        for (let i = 0; i < newCountries.length; i++) {
+          if (newCountries[i].activities.length) {
+            for (let j in newCountries[i].activities) {
+              if (
+                newCountries[i].activities[j].id === parseInt(action.payload)
+              ) {
+                array.push(newCountries[i]);
+              }
+            }
+          }
+        }
+      } else {
+        array = state.allCountries;
+      }
+
       return {
         ...state,
-        countries: searchCountry,
+        countries: array,
       };
     }
     case SEARCH_BY_CONTINENT: {

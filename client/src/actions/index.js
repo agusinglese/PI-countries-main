@@ -72,9 +72,9 @@ export const searchContinent = (continent) => ({
   payload: continent,
 });
 
-export const searchByActivity = (activity) => ({
+export const searchByActivity = (idActivity) => ({
   type: SEARCH_BY_ACTIVITY,
-  payload: activity,
+  payload: idActivity,
 });
 
 export const orderByName = (order) => ({

@@ -11,17 +11,20 @@ export const usePaginated = (countries) => {
   };
 
   const prevHandler = () => {
-    if (currentPage > 1) {
-      let prevPage = currentPage - 1;
-      setCurrentPage(prevPage);
-    }
+    let prevPage = currentPage - 1;
+    setCurrentPage(prevPage);
   };
   const nextHandler = () => {
-    if (currentPage < countries.length - 1) {
-      let nextPage = currentPage + 1;
-      setCurrentPage(nextPage);
-      console.log("pag", currentPage);
-    }
+    let nextPage = currentPage + 1;
+    setCurrentPage(nextPage);
+  };
+
+  const firstHandler = () => {
+    setCurrentPage(1);
+  };
+
+  const lastHandler = () => {
+    setCurrentPage(countries.length / countriesPage);
   };
 
   return {
@@ -33,5 +36,7 @@ export const usePaginated = (countries) => {
     currentPage,
     prevHandler,
     nextHandler,
+    lastHandler,
+    firstHandler,
   };
 };

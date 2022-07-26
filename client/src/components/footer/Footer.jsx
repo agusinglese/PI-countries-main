@@ -7,7 +7,7 @@ const FooterStyled = styled.footer`
   flex-direction: row;
   width: 100vw;
   background-color: #282c34;
-  min-height: 10vh;
+  height: 10vh;
   justify-content: center;
   font-size: calc(3px + 2vmin);
   color: white;

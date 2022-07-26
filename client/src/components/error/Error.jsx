@@ -1,14 +1,43 @@
-import { Link } from "react-router-dom";
-import style from "./Error.module.css";
+import { Link, useLocation } from "react-router-dom";
+import styled from "styled-components";
+
+const ErrorStyled = styled.div`
+  height: 80vh;
+  display: flex;
+  justify-items: center;
+`;
+
+const H3 = styled.h3`
+  color: red;
+  font-size: 1.5rem;
+`;
+
+const DivTag = styled.div`
+  background-color: whitesmoke;
+  margin: 0 20vw;
+  padding: 1rem;
+  width: 60vw;
+  height: 40vh;
+  margin-top: 1rem;
+`;
+
 function Error() {
+  const { pathname } = useLocation();
   return (
-    <div className={style.error}>
-      <h3 className={style.error}>Error 404</h3>
-      <p className={style.error}>Page not found</p>
-      <Link to="/">
-        <button className={style.error}>Back to home page</button>
-      </Link>
-    </div>
+    <ErrorStyled>
+      <DivTag>
+        <H3>Error 404: Page not found</H3>
+        <p>
+          {`The URL`} <b>{`http://localhost:3000${pathname}`}</b>{" "}
+          {`doesn't exist`}
+        </p>
+        <br />
+        <br />
+        <Link to="/">
+          <button>Back to home page</button>
+        </Link>
+      </DivTag>
+    </ErrorStyled>
   );
 }
 
