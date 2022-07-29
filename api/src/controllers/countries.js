@@ -3,9 +3,7 @@ const axios = require("axios");
 
 const getAllCountries = async () => {
   const countries = await Country.findAll({
-    include: {
-      model: Activity,
-    },
+    include: { model: Activity },
   });
   return countries;
 };
@@ -44,9 +42,29 @@ const getByName = async (name) => {
   return selectCountry;
 };
 
+const getByContinent = async (nameContinent) => {
+  let searchContinent = nameContinent.toUpperCase();
+  let countries = await getAllCountries();
+  let selectCountry = countries.filter(
+    (country) => country.continent.toUpperCase() === searchContinent
+  );
+  return selectCountry;
+};
+
+const getByActivity = async (idActivity) => {
+  let activity = await Activity.findAll({
+    where: { name: idActivity },
+    include: { model: Country },
+  });
+  let countriesByAct = activity[0].countries;
+  return countriesByAct;
+};
+
 module.exports = {
   getAllCountries,
   getById,
   getAPI,
   getByName,
+  getByContinent,
+  getByActivity,
 };

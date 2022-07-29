@@ -1,20 +1,17 @@
-import "./App.css";
-import Activity from "./components/activity/Activity";
-import CountryDetails from "./components/countryDetails/CountryDetails";
-import Home from "./components/home/Home";
+import CountryDetails from "./components/pages/CountryDetails";
+import Home from "./components/pages/Home";
 import { Route, Switch } from "react-router-dom";
-import LandingPage from "./components/landingPage/LandingPage";
-import Header from "./components/header/Header";
-import Error from "./components/error/Error";
+import LandingPage from "./components/pages/LandingPage";
+
+import Error from "./components/pages/Error";
 import GlobalStyle from "./components/GlobalStyled";
-import Footer from "./components/footer/Footer";
-import Activities from "./components/Activities";
+import Activities from "./components/pages/Activities";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <Header />
+
       <div>
         <Switch>
           <Route exact path="/">
@@ -25,9 +22,6 @@ function App() {
           </Route>
           <Route exact path="/country/:id" component={CountryDetails} />
           <Route exact path="/activities">
-            <Activity />
-          </Route>
-          <Route exact path="/activity">
             <Activities />
           </Route>
           <Route path="*">
@@ -35,7 +29,6 @@ function App() {
           </Route>
         </Switch>
       </div>
-      <Footer />
     </>
   );
 }

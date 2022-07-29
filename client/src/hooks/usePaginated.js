@@ -23,8 +23,8 @@ export const usePaginated = (countries) => {
     setCurrentPage(1);
   };
 
-  const lastHandler = () => {
-    setCurrentPage(countries.length / countriesPage);
+  const lastHandler = (totalPages) => {
+    setCurrentPage(totalPages);
   };
 
   return {

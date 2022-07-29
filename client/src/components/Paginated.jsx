@@ -6,22 +6,29 @@ const UlTag = styled.ul`
 `;
 
 const LiTag = styled.li`
-  color: ${(props) => (props.color ? "white" : "black")};
+  color: ${(props) => (props.color ? "whitesmoke" : "black")};
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   list-style: none;
-  border-radius: 0.3rem;
-  border: 1px solid gray;
+  border-radius: 0.5rem;
   cursor: pointer;
-  background-color: ${(props) => (props.color ? "black" : "none")};
+  background-color: ${(props) => (props.color ? "#E74C3C" : "none")};
+  border: 1px solid gray;
 `;
 
-const Img = styled.img`
-  width: 10px;
-  height: 10px;
-`;
+const Buttons = styled.button`
+  background-color: transparent;
+  border: 1px solid gray;
+  box-shadow: none;
+  padding: 8px 16px;
+  margin: 0 0.3rem;
 
+  &:hover {
+    background-color: #b3b6b7;
+    border: 1px solid gray;
+  }
+`;
 const DivTag = styled.div`
   margin: 1rem;
   display: flex;
@@ -42,6 +49,7 @@ function Paginated({
 }) {
   let pageNumbers = [];
   let totalPages = Math.ceil(totalCountries / countriesPage);
+  console.log("1", totalPages);
 
   for (let i = 1; i < totalPages + 1; i++) {
     pageNumbers.push(i);
@@ -54,16 +62,9 @@ function Paginated({
   return (
     <DivTag>
       {currentPage > 1 && (
-        <button onClick={() => firstHandler()}>Primera</button>
+        <Buttons onClick={() => firstHandler()}>&lt;&lt;</Buttons>
       )}
-      {currentPage > 1 && (
-        <button onClick={() => prevHandler()}>
-          <Img
-            src="https://cdn-icons-png.flaticon.com/128/7180/7180250.png"
-            alt="prev"
-          />
-        </button>
-      )}
+      {currentPage > 1 && <Buttons onClick={() => prevHandler()}>&lt;</Buttons>}
 
       <UlTag>
         {visibleNumbers &&
@@ -76,10 +77,10 @@ function Paginated({
           ))}
       </UlTag>
       {currentPage !== totalPages && (
-        <button onClick={() => nextHandler()}>Next</button>
+        <Buttons onClick={() => nextHandler()}>&gt;</Buttons>
       )}
       {currentPage !== totalPages && (
-        <button onClick={() => lastHandler()}>Ultima</button>
+        <Buttons onClick={() => lastHandler(totalPages)}>&gt;&gt;</Buttons>
       )}
     </DivTag>
   );

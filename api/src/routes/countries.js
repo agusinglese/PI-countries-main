@@ -1,11 +1,12 @@
 const { Router } = require("express");
 const router = Router();
-const axios = require("axios");
 const {
   getAPI,
   getAllCountries,
   getById,
   getByName,
+  getByContinent,
+  getByActivity,
 } = require("../controllers/countries.js");
 
 router.get("/", async (req, res, next) => {
@@ -26,6 +27,35 @@ router.get("/", async (req, res) => {
       : res.status(404).send(`No countries found with the name "${name}"`);
   } else {
     res.status(200).send(countries);
+  }
+});
+
+router.get("/filter", async (req, res) => {
+  const { continent, activity } = req.query;
+  if (activity === "All" && continent === "All") {
+    const countries = await getAllCountries();
+    res.status(200).send(countries);
+  } else if (activity === "All" && continent !== "All") {
+    const countries = await getByContinent(continent);
+    res.status(200).send(countries);
+  } else if (activity !== "All" && continent === "All") {
+    const countries = await getByActivity(activity);
+    res.status(200).send(countries);
+  } else if (activity !== "All" && continent !== "All") {
+    const countriesByContinent = await getByContinent(continent);
+    let countries = [];
+    countriesByContinent.forEach((el) => {
+      if (el.activities.length) {
+        el.activities.forEach((e) => {
+          if (e.name === activity) {
+            countries.push(el);
+          }
+        });
+      }
+    });
+    countries.length
+      ? res.status(200).send(countries)
+      : res.status(404).send("Countries not found");
   }
 });
 

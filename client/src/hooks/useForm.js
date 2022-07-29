@@ -1,18 +1,50 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { postActivity } from "../actions";
+import { deleteActivity, postActivity, putActivity } from "../actions";
 
-export const useForm = (initialForm, validateForm) => {
+export const useForm = (initialForm, postActive, putActive, deleteActive) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
+
+  const validateForm = (form) => {
+    let errors = {};
+    let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$/; //acepta letras y espacios, caracteres ajenos al ingles como la ñ
+
+    //por cada input, se tiene un if anidado
+    if (!form.name.trim()) {
+      errors.name = "The 'name' is required";
+    } else if (!regexName.test(form.name.trim())) {
+      errors.name = "The name only accepts letters and blanks";
+    }
+    if (!form.duration) {
+      errors.duration = "The 'duration' of the activity is required";
+    } else if (isNaN(form.duration)) {
+      errors.duration = "The duration must be a number";
+    }
+
+    if (!form.difficulty) {
+      errors.difficulty = "The 'difficulty' of the activity is required";
+    } else if (form.difficulty < 1 || form.difficulty > 5) {
+      errors.difficulty = "The difficulty must be a value between 1 and 5";
+    }
+
+    if (!form.season) {
+      errors.season = "The 'season' is required";
+    }
+
+    if (form.countries.length === 0) {
+      errors.countries = "At least one country is required";
+    }
+
+    return errors;
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   const handleBlur = (e) => {
-    handleChange(e);
     setErrors(validateForm({ ...form, [e.target.name]: e.target.value }));
   };
 
@@ -37,12 +69,30 @@ export const useForm = (initialForm, validateForm) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validateForm(form));
-    dispatch(postActivity(form));
+    if (postActive) {
+      dispatch(postActivity(form));
+      alert("The activity was successfully created");
+    }
+    if (putActive) {
+      dispatch(putActivity(form));
+      alert("The activity was successfully modified");
+    }
+    if (deleteActive) {
+      // eslint-disable-next-line no-restricted-globals
+      let msg = confirm(
+        `The activity "${form.name}" wil removed. Are you sure?`
+      );
+      if (msg) {
+        dispatch(deleteActivity(form));
+        alert("The activity was successfully deleted");
+      }
+    }
     handleReset();
   };
 
   const handleReset = () => {
     setForm({
+      id: "",
       name: "",
       duration: "",
       difficulty: "",
@@ -58,6 +108,21 @@ export const useForm = (initialForm, validateForm) => {
     });
   };
 
+  const sendData = (data) => {
+    const { name, duration, season, difficulty, id, countries } = data;
+    let nameCountries = countries.map((e) => e.name);
+
+    setForm({
+      ...form,
+      name: name,
+      duration: duration,
+      season: season,
+      difficulty: difficulty,
+      countries: nameCountries,
+      id: id,
+    });
+  };
+
   return {
     form,
     errors,
@@ -66,5 +131,6 @@ export const useForm = (initialForm, validateForm) => {
     handleSubmit,
     handleDelete,
     handleChangeList,
+    sendData,
   };
 };

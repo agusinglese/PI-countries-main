@@ -1,13 +1,15 @@
 import {
   POST_ACTIVITY,
   GET_ALL_COUNTRIES,
-  SEARCH_BY_ACTIVITY,
-  SEARCH_BY_CONTINENT,
   SEARCH_COUNTRY_BY_ID,
   SEARCH_COUNTRY_BY_NAME,
   GET_ACTIVITIES,
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
+  PUT_ACTIVITY,
+  DELETE_ACTIVITY,
+  FILTER_COUNTRIES,
+  HANDLE_ERROR,
 } from "../types";
 
 const initialState = {
@@ -15,6 +17,7 @@ const initialState = {
   allCountries: [],
   countryDetail: {},
   activities: [],
+  error: {},
 };
 
 export const rootReducer = (state = initialState, action) => {
@@ -32,39 +35,10 @@ export const rootReducer = (state = initialState, action) => {
     case SEARCH_COUNTRY_BY_NAME: {
       return { ...state, countries: action.payload };
     }
-    case SEARCH_BY_ACTIVITY: {
-      let array = [];
-      if (action.payload !== "All") {
-        let newCountries = state.allCountries;
-        for (let i = 0; i < newCountries.length; i++) {
-          if (newCountries[i].activities.length) {
-            for (let j in newCountries[i].activities) {
-              if (
-                newCountries[i].activities[j].id === parseInt(action.payload)
-              ) {
-                array.push(newCountries[i]);
-              }
-            }
-          }
-        }
-      } else {
-        array = state.allCountries;
-      }
-
+    case FILTER_COUNTRIES: {
       return {
         ...state,
-        countries: array,
-      };
-    }
-    case SEARCH_BY_CONTINENT: {
-      let allCountries = state.allCountries;
-      let countriesByContinent =
-        action.payload === "All"
-          ? allCountries
-          : allCountries.filter((e) => e.continent === action.payload);
-      return {
-        ...state,
-        countries: countriesByContinent,
+        countries: action.payload,
       };
     }
     case POST_ACTIVITY: {
@@ -87,6 +61,22 @@ export const rootReducer = (state = initialState, action) => {
           ? state.countries.sort((a, b) => a.population - b.population)
           : state.countries.reverse((a, b) => a.population - b.population);
       return { ...state, countries: countriesSorted };
+    }
+    case PUT_ACTIVITY: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_ACTIVITY: {
+      return {
+        ...state,
+      };
+    }
+    case HANDLE_ERROR: {
+      return {
+        ...state,
+        error: action.payload,
+      };
     }
     default:
       return state;

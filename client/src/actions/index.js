@@ -1,13 +1,15 @@
 import {
   GET_ACTIVITIES,
   GET_ALL_COUNTRIES,
-  SEARCH_BY_ACTIVITY,
-  SEARCH_BY_CONTINENT,
   SEARCH_COUNTRY_BY_ID,
   SEARCH_COUNTRY_BY_NAME,
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
+  FILTER_COUNTRIES,
+  HANDLE_ERROR,
 } from "../types";
+
+//COUNTRIES
 
 export const getAllCountries = () => {
   return function (dispatch) {
@@ -24,11 +26,23 @@ export const getAllCountries = () => {
 export const searchByName = (name) => {
   return function (dispatch) {
     return fetch(`http://localhost:3001/countries?name=${name}`)
-      .then((res) => res.json())
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText:
+                `Not found countries with the name "${name}"` || "Error404",
+            })
+      )
       .then((data) => {
         dispatch({ type: SEARCH_COUNTRY_BY_NAME, payload: data });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: HANDLE_ERROR, payload: err });
+      });
   };
 };
 
@@ -42,6 +56,43 @@ export const searchById = (id) => {
       .catch((err) => console.log(err));
   };
 };
+
+export const filterCountries = (filter) => {
+  const { continent, activity } = filter;
+  return function (dispatch) {
+    return fetch(
+      `http://localhost:3001/countries/filter?continent=${continent}&activity=${activity}`
+    )
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText:
+                `Not found countries in "${continent}" with the activity "${activity}"` ||
+                "Error404",
+            })
+      )
+      .then((data) => {
+        dispatch({ type: FILTER_COUNTRIES, payload: data });
+      })
+      .catch((err) => {
+        dispatch({ type: HANDLE_ERROR, payload: err });
+      });
+  };
+};
+
+export const orderByName = (order) => ({
+  type: ORDER_BY_NAME,
+  payload: order,
+});
+export const orderByPopulation = (order) => ({
+  type: ORDER_BY_POPULATION,
+  payload: order,
+});
+
+//ACTIVITIES
 
 export const postActivity = (activity) => {
   return function (dispatch) {
@@ -67,21 +118,27 @@ export const getActivities = () => {
   };
 };
 
-export const searchContinent = (continent) => ({
-  type: SEARCH_BY_CONTINENT,
-  payload: continent,
-});
+export const putActivity = (data) => {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/activities/put`, {
+      method: "PUT",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+};
 
-export const searchByActivity = (idActivity) => ({
-  type: SEARCH_BY_ACTIVITY,
-  payload: idActivity,
-});
-
-export const orderByName = (order) => ({
-  type: ORDER_BY_NAME,
-  payload: order,
-});
-export const orderByPopulation = (order) => ({
-  type: ORDER_BY_POPULATION,
-  payload: order,
-});
+export const deleteActivity = (data) => {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/activities/delete/${data.id}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
+};

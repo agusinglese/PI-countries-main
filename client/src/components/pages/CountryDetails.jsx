@@ -1,0 +1,184 @@
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams, Link, useLocation } from "react-router-dom";
+import { searchById } from "../../actions";
+import ActivityCard from "../ActivityCard";
+import Header from "../Header";
+import styled from "styled-components";
+
+const Conteiner = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-left: 2rem;
+`;
+
+const SubConteiner = styled.div`
+  margin: 0 20vw;
+  width: 60vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: baseline;
+`;
+
+const Card = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 2rem 0;
+`;
+
+const Tags = styled.span`
+  font-weight: bold;
+  margin: 0.5rem;
+  padding: 2rem 0;
+`;
+
+const SubTags = styled.div`
+  padding: 0.3rem 0;
+`;
+
+const Img = styled.img`
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+  box-shadow: 1px 1px gray;
+`;
+
+const Title = styled.h1`
+  padding-top: 1rem;
+  margin: 1rem 0 0 0;
+  border: none;
+`;
+
+const Background = styled.div`
+  background-color: #eaecee;
+  margin-left: 20vw;
+  width: 60vw;
+  border-radius: 1rem;
+  margin-top: 0;
+  box-shadow: 1px 1px 3px 1px;
+`;
+
+const ActTitle = styled.h3`
+  background-color: #eaecee;
+  border-radius: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 20vw 0.1rem 20vw;
+  width: 60vw;
+  letter-spacing: 3px;
+  box-shadow: 1px 1px 3px 1px;
+`;
+const Modal = styled.div`
+  position: fixed;
+  opacity: 0.5;
+  display: none;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &:target {
+    display: block;
+  }
+`;
+
+function CountryDetails() {
+  const { pathname } = useLocation();
+  console.log(pathname);
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.countryDetail);
+  const { id } = useParams();
+
+  useEffect(() => {
+    dispatch(searchById(id));
+  }, [dispatch]);
+
+  const toNumber = (number) => {
+    let aux = number.toString().split("").reverse();
+    let numberPopulation = [];
+    for (let i = 0; i < aux.length; i++) {
+      if (i !== 0 && i % 3 === 0) {
+        numberPopulation.push(".");
+      }
+      numberPopulation.push(aux[i]);
+    }
+    return numberPopulation.reverse().join("");
+  };
+
+  return (
+    <>
+      <div>
+        <div>
+          <Background>
+            <Title>{data.name ? data.name.toUpperCase() : `Not found`}</Title>
+            <Card>
+              <div className="image-container">
+                <Img src={data.flag} alt="flag" />
+              </div>
+              <Conteiner>
+                <SubTags>
+                  <Tags>Capital : </Tags>
+                  <span>{data.capital ? data.capital : `Not found`}</span>
+                </SubTags>
+                <SubTags>
+                  <Tags>Population : </Tags>
+                  <span>
+                    {data.population
+                      ? `${toNumber(data.population)} pop.`
+                      : `Not found`}
+                  </span>
+                </SubTags>
+                <SubTags>
+                  <Tags>Area : </Tags>
+                  <span>
+                    {data.area
+                      ? `${data.area / 1000000} million km2`
+                      : `Not found`}
+                  </span>
+                </SubTags>
+                <SubTags>
+                  <Tags>Continent : </Tags>
+                  <span>{data.continent ? data.continent : `Not found`}</span>
+                </SubTags>
+                <SubTags>
+                  <Tags>Subregion : </Tags>
+                  <span>{data.subregion ? data.subregion : `Not found`}</span>
+                </SubTags>
+              </Conteiner>
+            </Card>
+          </Background>
+          <div>
+            {data.activities && data.activities.length ? (
+              <ActTitle>TOURIST ACTIVITIES</ActTitle>
+            ) : (
+              <ActTitle>This country has no associated activities</ActTitle>
+            )}
+            <SubConteiner>
+              {data.activities &&
+                data.activities.map((act) => (
+                  <ActivityCard
+                    tags={Tags}
+                    subTags={SubTags}
+                    key={act.id}
+                    dataActivity={act}
+                  />
+                ))}
+            </SubConteiner>
+          </div>
+        </div>
+        <br />
+        <Link to="/home">
+          <button>Back to home</button>
+        </Link>
+      </div>
+    </>
+  );
+}
+
+export default CountryDetails;
