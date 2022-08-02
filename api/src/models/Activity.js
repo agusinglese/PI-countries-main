@@ -4,6 +4,7 @@ module.exports = (sequelize) => {
   sequelize.define("activity", {
     name: {
       type: DataTypes.STRING,
+      unique: true,
       set(value) {
         this.setDataValue("name", value[0].toUpperCase() + value.slice(1));
       },
@@ -16,16 +17,7 @@ module.exports = (sequelize) => {
     },
     duration: { type: DataTypes.INTEGER, allowNull: false },
     season: {
-      type: DataTypes.ENUM(
-        "Summer",
-        "Fall",
-        "Winter",
-        "Spring",
-        "Invierno",
-        "Verano",
-        "Primavera",
-        "Otoño"
-      ),
+      type: DataTypes.ENUM("Summer", "Fall", "Winter", "Spring"),
       allowNull: false,
     },
   });

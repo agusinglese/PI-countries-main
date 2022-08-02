@@ -3,31 +3,27 @@ import styled from "styled-components";
 const UlTag = styled.ul`
   display: inline;
   padding: 0;
+  margin: 0 1rem;
 `;
 
 const LiTag = styled.li`
-  color: ${(props) => (props.color ? "whitesmoke" : "black")};
+  color: ${(props) => props.color};
   float: left;
   padding: 8px 16px;
   text-decoration: none;
   list-style: none;
   border-radius: 0.5rem;
   cursor: pointer;
-  background-color: ${(props) => (props.color ? "#E74C3C" : "none")};
+  background-color: ${(props) => props.bgcolor};
   border: 1px solid gray;
 `;
 
 const Buttons = styled.button`
-  background-color: transparent;
+  // background-color: transparent;
   border: 1px solid gray;
   box-shadow: none;
   padding: 8px 16px;
   margin: 0 0.3rem;
-
-  &:hover {
-    background-color: #b3b6b7;
-    border: 1px solid gray;
-  }
 `;
 const DivTag = styled.div`
   margin: 1rem;
@@ -49,7 +45,6 @@ function Paginated({
 }) {
   let pageNumbers = [];
   let totalPages = Math.ceil(totalCountries / countriesPage);
-  console.log("1", totalPages);
 
   for (let i = 1; i < totalPages + 1; i++) {
     pageNumbers.push(i);
@@ -69,8 +64,13 @@ function Paginated({
       <UlTag>
         {visibleNumbers &&
           visibleNumbers.map((number, index) => (
+            // eslint-disable-next-line jsx-a11y/anchor-is-valid
             <a onClick={() => pagine(number)}>
-              <LiTag key={index} color={number === currentPage}>
+              <LiTag
+                key={index}
+                bgcolor={number === currentPage ? "#E74C3C" : "#e9d8a6"}
+                color={number === currentPage ? "whitesmoke" : "black"}
+              >
                 {number}
               </LiTag>
             </a>

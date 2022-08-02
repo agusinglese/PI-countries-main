@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { searchById } from "../../actions";
-import ActivityCard from "../ActivityCard";
-import Header from "../Header";
+import ActivityCard from "../activities/ActivityCard";
 import styled from "styled-components";
 
 const Conteiner = styled.div`
@@ -14,21 +13,19 @@ const Conteiner = styled.div`
   margin-left: 2rem;
 `;
 
-const SubConteiner = styled.div`
-  margin: 0 20vw;
-  width: 60vw;
+const Layout = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+`;
+const SubConteiner = styled(Layout)`
+  margin: 0 20vw;
+  width: 60vw;
   align-items: baseline;
 `;
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
+const Card = styled(Layout)`
   padding: 2rem 0;
 `;
 
@@ -44,6 +41,7 @@ const SubTags = styled.div`
 
 const Img = styled.img`
   border: 1px solid #ddd;
+  background-color: whitesmoke;
   border-radius: 4px;
   padding: 5px;
   width: 100%;
@@ -54,10 +52,11 @@ const Title = styled.h1`
   padding-top: 1rem;
   margin: 1rem 0 0 0;
   border: none;
+  font-size: calc(1vw + 2em);
 `;
 
 const Background = styled.div`
-  background-color: #eaecee;
+  background-color: #94d2bd;
   margin-left: 20vw;
   width: 60vw;
   border-radius: 1rem;
@@ -66,26 +65,13 @@ const Background = styled.div`
 `;
 
 const ActTitle = styled.h3`
-  background-color: #eaecee;
+  background-color: #94d2bd;
   border-radius: 1rem;
   padding: 1rem 0;
   margin: 1rem 20vw 0.1rem 20vw;
   width: 60vw;
   letter-spacing: 3px;
   box-shadow: 1px 1px 3px 1px;
-`;
-const Modal = styled.div`
-  position: fixed;
-  opacity: 0.5;
-  display: none;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-
-  &:target {
-    display: block;
-  }
 `;
 
 function CountryDetails() {

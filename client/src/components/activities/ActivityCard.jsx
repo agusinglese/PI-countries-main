@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 const DivTag = styled.div`
-  border: 1px solid grey;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -30,7 +29,7 @@ const SubTags = styled.div`
   padding: 0.2rem 0;
 `;
 const Title = styled.h3`
-  background-image: linear-gradient(white, #ffc300);
+  background-color: #94d2bd;
   border-radius: 0.5rem;
   padding: 1rem 0;
   margin-top: 0;

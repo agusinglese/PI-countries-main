@@ -18,18 +18,19 @@ body {
     margin-bottom: 0;
     color: #263238;
     position: relative;
-    background-color : #d6eaf8;;
+    background-color: #005f73;
     min-height: 100vh;
     padding-bottom: 3rem;
     
   }
 button, input[type="submit"] {
-  border: thin solid #2ECC71;
+  border: thin solid #ee9b00;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   margin: 0 0.5rem 0;
   display: inline-block;
-  background-color: #2ECC71 ;
+ //background-color: #94d2bd;
+  background-color: #ee9b00;
   font-weight: bold;
   font-size: 1rem;
   line-height: 1;
@@ -39,13 +40,13 @@ button, input[type="submit"] {
   vertical-align: middle;
   cursor: pointer;
   color: #263238;
-  box-shadow: 2px 2px #1D8348;
+  box-shadow: 1px 1px 1px 1px #ca6702;
 }
 
 
 button:hover,input[type="submit"]:hover {
-  background-color: #FF6F0080;
-  border: #FF6F0080 ;
+  background-color: #e9d8a6;
+  border: #ca6702 ;
 }
 
 select {
@@ -100,6 +101,13 @@ h1 {
   font-style: oblique;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
+
+legend{
+  padding: 0.5rem 0;
+  margin: 0 0 0.5rem 0;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1;}
 
 
 p {

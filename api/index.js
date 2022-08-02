@@ -30,6 +30,6 @@ conn.sync({ force: false }).then(() => {
 /*
 models --> se comunica con la base de datos
 rutas --> es la puerta de entrada de la api
-las tutas tienen que llamar a un controlador
+las rutas tienen que llamar a un controlador
 controller --> intermediario entre rutas y base de datos
 */

@@ -71,11 +71,9 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
     setErrors(validateForm(form));
     if (postActive) {
       dispatch(postActivity(form));
-      alert("The activity was successfully created");
     }
     if (putActive) {
       dispatch(putActivity(form));
-      alert("The activity was successfully modified");
     }
     if (deleteActive) {
       // eslint-disable-next-line no-restricted-globals
@@ -84,7 +82,6 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
       );
       if (msg) {
         dispatch(deleteActivity(form));
-        alert("The activity was successfully deleted");
       }
     }
     handleReset();

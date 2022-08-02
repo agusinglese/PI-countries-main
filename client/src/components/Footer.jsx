@@ -8,9 +8,8 @@ const FooterStyled = styled.footer`
   height: 3rem;
   justify-content: space-between;
   font-size: calc(3px + 2vmin);
-  color: white;
   width: 100%;
-  background-color: #2e4053;
+  background-color: #94d2bd;
   align-items: center;
   padding: 0 2rem;
 `;

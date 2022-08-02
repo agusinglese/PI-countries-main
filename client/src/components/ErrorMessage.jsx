@@ -1,4 +1,5 @@
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const Div = styled.div`
@@ -31,7 +32,8 @@ const A = styled.a`
 `;
 
 function ErrorMessage() {
-  const error = useSelector((state) => state.error);
+  const error = useSelector((state) => state.msgError);
+  const { pathname } = useLocation();
 
   return (
     <Div>
@@ -39,9 +41,16 @@ function ErrorMessage() {
         <h4>ERROR {error.status}</h4>
         <p>{error.statusText}</p>
 
-        <A href="http://localhost:3000/home">
-          <button>Close</button>
-        </A>
+        {pathname === "/home" && (
+          <A href="http://localhost:3000/home">
+            <button>Close</button>
+          </A>
+        )}
+        {pathname === "/activities" && (
+          <A href="http://localhost:3000/activities">
+            <button>Close</button>
+          </A>
+        )}
       </Content>
     </Div>
   );

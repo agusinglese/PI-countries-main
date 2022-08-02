@@ -1,27 +1,15 @@
 import {
   GET_ACTIVITIES,
-  GET_ALL_COUNTRIES,
   SEARCH_COUNTRY_BY_ID,
   SEARCH_COUNTRY_BY_NAME,
   ORDER_BY_NAME,
   ORDER_BY_POPULATION,
   FILTER_COUNTRIES,
   HANDLE_ERROR,
+  CONFIRM_ACTION,
 } from "../types";
 
 //COUNTRIES
-
-export const getAllCountries = () => {
-  return function (dispatch) {
-    //retorno una funcion que recibe el dispatch. Permite retornar una peticion asincrona
-    return fetch(`http://localhost:3001/countries`)
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch({ type: GET_ALL_COUNTRIES, payload: data });
-      })
-      .catch((err) => console.log(err));
-  };
-};
 
 export const searchByName = (name) => {
   return function (dispatch) {
@@ -32,8 +20,7 @@ export const searchByName = (name) => {
           : Promise.reject({
               err: true,
               status: res.status || "00",
-              statusText:
-                `Not found countries with the name "${name}"` || "Error404",
+              statusText: `Not found countries with the name "${name}"`,
             })
       )
       .then((data) => {
@@ -69,9 +56,7 @@ export const filterCountries = (filter) => {
           : Promise.reject({
               err: true,
               status: res.status || "00",
-              statusText:
-                `Not found countries in "${continent}" with the activity "${activity}"` ||
-                "Error404",
+              statusText: `Not found countries in "${continent}" with the activity "${activity}"`,
             })
       )
       .then((data) => {
@@ -87,13 +72,13 @@ export const orderByName = (order) => ({
   type: ORDER_BY_NAME,
   payload: order,
 });
+
 export const orderByPopulation = (order) => ({
   type: ORDER_BY_POPULATION,
   payload: order,
 });
 
 //ACTIVITIES
-
 export const postActivity = (activity) => {
   return function (dispatch) {
     return fetch(`http://localhost:3001/activities`, {
@@ -101,9 +86,17 @@ export const postActivity = (activity) => {
       body: JSON.stringify(activity),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      .catch((err) => console.log(err));
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText: `Already exists an activity with the name ${activity.name}`,
+            })
+      )
+      .then((data) => dispatch({ type: CONFIRM_ACTION, payload: data }))
+      .catch((err) => dispatch({ type: HANDLE_ERROR, payload: err }));
   };
 };
 
@@ -126,7 +119,7 @@ export const putActivity = (data) => {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => dispatch({ type: CONFIRM_ACTION, payload: data }))
       .catch((err) => console.log(err));
   };
 };
@@ -137,8 +130,20 @@ export const deleteActivity = (data) => {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((res) =>
+        res.ok
+          ? Promise.resolve({
+              name: data.name,
+              status: res.status || "00",
+              statusText: `The activity was deleted`,
+            })
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText: "Error404",
+            })
+      )
+      .then((data) => dispatch({ type: CONFIRM_ACTION, payload: data }))
       .catch((err) => console.log(err));
   };
 };

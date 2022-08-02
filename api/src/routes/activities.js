@@ -1,39 +1,51 @@
 const { Router } = require("express");
-const { postActivity } = require("../controllers/activities.js");
 const router = Router();
 const { Activity, Country } = require("../db.js");
 
 router.post("/", async (req, res) => {
   const { name, difficulty, season, duration, countries } = req.body;
   if (!name || !duration || !difficulty || !season || !countries.length) {
-    res.sendStatus(404).send("Incomplete data");
+    return res.status(404).send("Incomplete data");
   }
 
   try {
-    const [newActivity, created] = await Activity.findOrCreate({
-      where: {
-        name,
-        difficulty,
-        season,
-        duration,
-      },
-    });
-    if (countries.length > 0) {
-      countries.forEach(async (country) => {
-        let searchCountry = await Country.findAll({ where: { name: country } });
-        await newActivity.setCountries(searchCountry);
+    const searchAct = await Activity.findOne({ where: { name } });
+    if (searchAct) res.status(404).send("Name already exists");
+    else {
+      const [newActivity] = await Activity.findOrCreate({
+        where: {
+          name,
+          difficulty,
+          season,
+          duration,
+        },
       });
-    }
 
-    res.status(200).send(newActivity);
+      if (countries.length > 0) {
+        countries.forEach(async (country) => {
+          let searchCountry = await Country.findAll({
+            where: { name: country },
+          });
+          await newActivity.setCountries(searchCountry);
+        });
+      }
+      res.status(200).send(newActivity);
+    }
   } catch (e) {
-    res.send(`sor error${e}`);
+    console.log(e);
   }
 });
 
 router.get("/", async (req, res) => {
-  const activity = await Activity.findAll({ include: { model: Country } });
-  res.send(activity);
+  try {
+    const activity = await Activity.findAll({
+      include: { model: Country },
+      order: [["name", "ASC"]],
+    });
+    res.send(activity);
+  } catch (e) {
+    res.send(e);
+  }
 });
 
 router.put("/put", async (req, res) => {
@@ -43,6 +55,12 @@ router.put("/put", async (req, res) => {
       { name, duration, season, difficulty },
       { where: { id } }
     );
+    const activity = await Activity.findOne({ where: { id } });
+    await activity.removeCountries([]);
+    countries.forEach(async (country) => {
+      const countryAdd = await Country.findAll({ where: { name: country } });
+      activity.setCountries(countryAdd);
+    });
 
     res.status(200).send(`The activity ${name} was modified`);
   } catch (e) {

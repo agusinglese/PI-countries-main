@@ -1,13 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getActivities } from "../../actions";
 import { useEffect, useState } from "react";
-import ActivityCard from "../ActivityCard";
-import FormActivity from "../FormActivity";
+import ActivityCard from "./ActivityCard";
+import FormActivity from "./FormActivity";
 import { useForm } from "../../hooks/useForm";
 import { Link, useLocation } from "react-router-dom";
 import Header from "../Header";
 import styled from "styled-components";
 import Footer from "../Footer";
+import ErrorMessage from "../ErrorMessage";
+import ConfirmMessage from "./ConfirmMessage";
+import Loader from "../Loader";
 
 const initialForm = {
   name: "",
@@ -17,6 +20,7 @@ const initialForm = {
   countries: [],
 };
 
+//ESTILOS
 const DivCards = styled.div`
   display: flex;
   flex-direction: row;
@@ -30,14 +34,26 @@ const Buttons = styled.button`
 
 const Conteiner = styled.div`
   background-size: cover;
+  position: relative;
+`;
+
+const SubConteiner = styled.div`
+  background-color: #94d2bd; //#38a3a5;;
+  box-shadow: 2px 4px 1px #2ba1a3;
+  border-bottom-left-radius: 8rem;
+  border-bottom-right-radius: 8rem;
+  padding-top: 15vh;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
 `;
 
 function Activities() {
   const { pathname } = useLocation();
-  const activities = useSelector((state) => state.activities);
+  const { activities, msgError, msgConfirm } = useSelector((state) => state);
   const [postActive, setPostActive] = useState(false);
   const [putActive, setPutActive] = useState(false);
   const [deleteActive, setDeleteActive] = useState(false);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   const {
     form,
@@ -52,7 +68,8 @@ function Activities() {
 
   useEffect(() => {
     dispatch(getActivities());
-  }, [activities, dispatch]);
+    setLoading(false);
+  }, [dispatch]);
 
   const handleAction = (e) => {
     if (e.target.value === "POST") {
@@ -73,20 +90,24 @@ function Activities() {
   return (
     <>
       <Conteiner>
-        <Header pathname={pathname} />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+        {msgConfirm.hasOwnProperty("name") && (
+          <ConfirmMessage
+            putActive={putActive}
+            deleteActive={deleteActive}
+            postActive={postActive}
+          />
+        )}
 
-        <div>
+        {msgError.hasOwnProperty("err") && <ErrorMessage />}
+        <Header pathname={pathname} />
+
+        <SubConteiner>
           {activities.length ? (
-            <h1>Tourist Activities</h1>
+            <h1>TOURIST ACTIVITIES</h1>
           ) : (
-            <h3>Activities not found</h3>
+            <h1>Activities not found</h1>
           )}
-        </div>
+        </SubConteiner>
         <div>
           {!putActive && !postActive && !deleteActive && (
             <Buttons value="POST" onClick={(e) => handleAction(e)}>
@@ -108,7 +129,7 @@ function Activities() {
             false
           )}
         </div>
-
+        {loading && <Loader />}
         {(postActive || putActive || deleteActive) && (
           <FormActivity
             handleBlur={handleBlur}
@@ -133,7 +154,9 @@ function Activities() {
         )}
         <DivCards>
           {activities &&
-            activities.map((act) => <ActivityCard dataActivity={act} />)}
+            activities.map((act) => (
+              <ActivityCard key={act.id} dataActivity={act} />
+            ))}
         </DivCards>
       </Conteiner>
       <Footer />

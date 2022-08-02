@@ -1,11 +1,11 @@
-import CountryDetails from "./components/pages/CountryDetails";
-import Home from "./components/pages/Home";
+import CountryDetails from "./components/countryDetails/CountryDetails";
+import Home from "./components/home/Home";
 import { Route, Switch } from "react-router-dom";
-import LandingPage from "./components/pages/LandingPage";
+import LandingPage from "./components/LandingPage";
 
-import Error from "./components/pages/Error";
+import Error from "./components/Error";
 import GlobalStyle from "./components/GlobalStyled";
-import Activities from "./components/pages/Activities";
+import Activities from "./components/activities/Activities";
 
 function App() {
   return (

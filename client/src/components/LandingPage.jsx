@@ -2,11 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const StartButton = styled.button`
-  background-color: #780b0b;
+  background-image: linear-gradient(#94d2bd, #005f73, #94d2bd);
   color: whitesmoke;
   border-radius: 50%;
   margin-top: 10rem;
-  box-shadow: 0 20px black;
+  box-shadow: 0 20px #005f73;
   border: none;
   padding: 20px;
   width: 180px;
@@ -16,7 +16,7 @@ const StartButton = styled.button`
   font-size: 20px;
 
   &:hover {
-    background-color: #780b0b80;
+    background-image: linear-gradient(#005f73, #94d2bd, #005f73);
   }
   &:active {
     background-color: #460707;

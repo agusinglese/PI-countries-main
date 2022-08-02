@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getActivities, getAllCountries } from "../actions/index";
+import { getActivities, filterCountries } from "../../actions/index";
 
 import styled from "styled-components";
 
 const Conjunto = styled.div`
-  background-color: #eaecee;
+  background-color: #94d2bd;
   border-radius: 1rem;
   padding: 1rem 0;
   margin: 0 25vw;
@@ -70,14 +70,15 @@ function FormActivity({
   sendData,
 }) {
   const dispatch = useDispatch();
-  const { allCountries, activities } = useSelector((state) => state);
+  const { countries, activities } = useSelector((state) => state);
 
   useEffect(() => {
-    dispatch(getAllCountries());
+    let filter = { continent: "All", activity: "All" };
+    dispatch(filterCountries(filter));
     dispatch(getActivities());
   }, [dispatch]);
 
-  let orderCountries = allCountries.map((c) => c.name).sort();
+  let orderCountries = countries.sort((a, b) => a.name.localeCompare(b.name));
 
   const handleSelectActivity = (e) => {
     const selectActivity = activities.find(
@@ -224,27 +225,26 @@ function FormActivity({
               </select>
               {errors.season && <p style={style}>{errors.season}</p>}
             </DivTag>
-            {!putActive && (
-              <DivTag>
-                <label>Countries: </label>
-                <select
-                  name="countries"
-                  value={form.countries}
-                  onChange={handleChangeList}
-                >
-                  <option value="">Select countries...</option>
-                  {allCountries &&
-                    orderCountries.map((el, index) => (
-                      <option key={index} value={el} size="10">
-                        {el}
-                      </option>
-                    ))}
-                </select>
-                {errors.countries && <p style={style}>{errors.countries}</p>}
-              </DivTag>
-            )}
 
-            {form.countries.length && !putActive
+            <DivTag>
+              <label>Countries: </label>
+              <select
+                name="countries"
+                value={form.countries}
+                onChange={handleChangeList}
+              >
+                <option value="">Select countries...</option>
+                {countries &&
+                  orderCountries.map((el, index) => (
+                    <option key={el.id} value={el.name} size="10">
+                      {el.name}
+                    </option>
+                  ))}
+              </select>
+              {errors.countries && <p style={style}>{errors.countries}</p>}
+            </DivTag>
+
+            {form.countries.length
               ? form.countries.map((e) => (
                   <UlTag>
                     <LiTag key={e}>

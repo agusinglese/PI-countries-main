@@ -1,4 +1,4 @@
-import { searchByName } from "../actions";
+import { searchByName } from "../../actions";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
