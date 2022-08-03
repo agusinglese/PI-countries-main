@@ -68,6 +68,24 @@ export const filterCountries = (filter) => {
   };
 };
 
+/*export const filterCountries = (filter) => {
+  const { continent, activity } = filter;
+  return async function (dispatch) {
+    try {
+      const response = await fetch(
+      `http://localhost:3001/countries/filter?continent=${continent}&activity=${activity}`
+    )
+    const res = response.ok ? await response.json() : await Promise.reject({
+              err: true,
+              status: response.status || "00",
+              statusText: `Not found countries in "${continent}" with the activity "${activity}"`,
+            })
+    return dispatch({ type: FILTER_COUNTRIES, payload: res })
+  }catch(err) {
+        dispatch({ type: HANDLE_ERROR, payload: err });
+      }
+};*/
+
 export const orderByName = (order) => ({
   type: ORDER_BY_NAME,
   payload: order,

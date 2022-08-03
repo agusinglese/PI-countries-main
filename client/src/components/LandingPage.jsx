@@ -2,29 +2,36 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 const StartButton = styled.button`
-  background-image: linear-gradient(#94d2bd, #005f73, #94d2bd);
-  color: whitesmoke;
-  border-radius: 50%;
-  margin-top: 10rem;
-  box-shadow: 0 20px #005f73;
-  border: none;
-  padding: 20px;
-  width: 180px;
-  height: 150px;
-  transition: all 1s;
+  background-color: transparent;
+  margin-top: 5rem;
+  margin-left: 5rem;
+  transition: all 0.5s;
   cursor: pointer;
-  font-size: 20px;
+  font-size: 80px;
+  text-align: center;
+  box-shadow: none;
+  border: none;
 
   &:hover {
-    background-image: linear-gradient(#005f73, #94d2bd, #005f73);
-  }
-  &:active {
-    background-color: #460707;
-    box-shadow: 0 3px black;
-    transform: translateY(4px);
+    border-radius: 8rem;
+    background-color: whitesmoke;
+    padding-right: 25px;
   }
 `;
+const Span = styled.span`
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+  color: transparent;
+  text-align: center;
 
+  &:hover {
+    //background-color: whitesmoke;
+    padding-right: 25px;
+    color: black;
+  }
+`;
 const Conteiner = styled.div`
   height: 100vh;
   display: flex;
@@ -36,17 +43,20 @@ const Conteiner = styled.div`
 `;
 
 const Img = styled.img`
-  height: 15vh;
+  height: 25vh;
   width: auto;
-  margin: 1rem;
 `;
 
 function LandingPage() {
   return (
     <Conteiner>
-      <Img src="icon.png" alt="logo" />
       <NavLink to="/home">
-        <StartButton>LET'S GO!</StartButton>
+        <StartButton>
+          <Span>
+            <Img src="icon.png" alt="logo" />
+            🡆
+          </Span>
+        </StartButton>
       </NavLink>
     </Conteiner>
   );

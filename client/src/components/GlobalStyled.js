@@ -24,13 +24,12 @@ body {
     
   }
 button, input[type="submit"] {
-  border: thin solid #ee9b00;
+  border: thin solid #f8e16c;
   border-radius: 0.5rem;
   padding: 0.5rem 1rem;
   margin: 0 0.5rem 0;
   display: inline-block;
- //background-color: #94d2bd;
-  background-color: #ee9b00;
+  background-color: #f8e16c;
   font-weight: bold;
   font-size: 1rem;
   line-height: 1;
@@ -40,13 +39,14 @@ button, input[type="submit"] {
   vertical-align: middle;
   cursor: pointer;
   color: #263238;
-  box-shadow: 1px 1px 1px 1px #ca6702;
+  box-shadow: 1px 1px 1px 1px #B39E32;
 }
 
 
 button:hover,input[type="submit"]:hover {
-  background-color: #e9d8a6;
+  background-color: #B39E32;
   border: #ca6702 ;
+
 }
 
 select {
