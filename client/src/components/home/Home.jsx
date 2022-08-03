@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { getActivities } from "../../actions";
+import { getActivities, getAllCountries } from "../../actions";
 import CountryCard from "./CountryCard";
 import Paginated from "./Paginated";
 import { usePaginated } from "../../hooks/usePaginated";
@@ -44,6 +44,10 @@ function Home() {
     positionOfTheFirstCountry,
     positionOfTheLastCountry
   );
+
+  useEffect(() => {
+    dispatch(getAllCountries());
+  }, []);
 
   useEffect(() => {
     dispatch(getActivities());

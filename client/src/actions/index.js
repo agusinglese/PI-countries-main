@@ -7,10 +7,31 @@ import {
   FILTER_COUNTRIES,
   HANDLE_ERROR,
   CONFIRM_ACTION,
+  GET_ALL_COUNTRIES,
 } from "../types";
 
 //COUNTRIES
-
+export const getAllCountries = () => {
+  return function (dispatch) {
+    return fetch(`http://localhost:3001/countries`)
+      .then((res) =>
+        res.ok
+          ? res.json()
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText: `Not found countries`,
+            })
+      )
+      .then((data) => {
+        dispatch({ type: GET_ALL_COUNTRIES, payload: data });
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: HANDLE_ERROR, payload: err });
+      });
+  };
+};
 export const searchByName = (name) => {
   return function (dispatch) {
     return fetch(`http://localhost:3001/countries?name=${name}`)
@@ -68,24 +89,6 @@ export const filterCountries = (filter) => {
   };
 };
 
-/*export const filterCountries = (filter) => {
-  const { continent, activity } = filter;
-  return async function (dispatch) {
-    try {
-      const response = await fetch(
-      `http://localhost:3001/countries/filter?continent=${continent}&activity=${activity}`
-    )
-    const res = response.ok ? await response.json() : await Promise.reject({
-              err: true,
-              status: response.status || "00",
-              statusText: `Not found countries in "${continent}" with the activity "${activity}"`,
-            })
-    return dispatch({ type: FILTER_COUNTRIES, payload: res })
-  }catch(err) {
-        dispatch({ type: HANDLE_ERROR, payload: err });
-      }
-};*/
-
 export const orderByName = (order) => ({
   type: ORDER_BY_NAME,
   payload: order,
@@ -130,6 +133,7 @@ export const getActivities = () => {
 };
 
 export const putActivity = (data) => {
+  console.log(data);
   return function (dispatch) {
     return fetch(`http://localhost:3001/activities/put`, {
       method: "PUT",

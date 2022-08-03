@@ -10,6 +10,7 @@ import {
   FILTER_COUNTRIES,
   HANDLE_ERROR,
   CONFIRM_ACTION,
+  GET_ALL_COUNTRIES,
 } from "../types";
 
 const initialState = {
@@ -22,6 +23,9 @@ const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_ALL_COUNTRIES: {
+      return { ...state, countries: action.payload };
+    }
     case SEARCH_COUNTRY_BY_ID: {
       return { ...state, countryDetail: action.payload };
     }
