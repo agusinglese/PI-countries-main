@@ -70,7 +70,6 @@ router.put("/put", async (req, res) => {
 
 router.delete("/delete/:id", async (req, res) => {
   const id = parseInt(req.params.id);
-  console.log(id);
   try {
     await Activity.destroy({ where: { id } });
     res.status(200).send("The activity was successfully deleted");

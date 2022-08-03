@@ -18,7 +18,8 @@ const DivTag = styled.div`
   padding: 1rem;
   width: 60vw;
   height: 40vh;
-  margin-top: 1rem;
+  margin-top: 2rem;
+  border-radius: 2rem;
 `;
 
 function Error() {

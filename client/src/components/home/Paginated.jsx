@@ -19,7 +19,6 @@ const LiTag = styled.li`
 `;
 
 const Buttons = styled.button`
-  // background-color: transparent;
   border: 1px solid gray;
   box-shadow: none;
   padding: 8px 16px;
@@ -45,7 +44,8 @@ function Paginated({
 }) {
   let pageNumbers = [];
   let totalPages = Math.ceil(totalCountries / countriesPage);
-
+  
+  
   for (let i = 1; i < totalPages + 1; i++) {
     pageNumbers.push(i);
   }

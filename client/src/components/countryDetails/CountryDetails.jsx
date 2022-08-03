@@ -85,6 +85,7 @@ function CountryDetails() {
     dispatch(searchById(id));
   }, [dispatch]);
 
+  //Formato poblacion
   const toNumber = (number) => {
     let aux = number.toString().split("").reverse();
     let numberPopulation = [];

@@ -71,6 +71,7 @@ function Activities() {
     setLoading(false);
   }, [dispatch]);
 
+  //Accion a ejecutar
   const handleAction = (e) => {
     if (e.target.value === "POST") {
       setPostActive(true);

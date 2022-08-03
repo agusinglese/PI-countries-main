@@ -118,7 +118,19 @@ export const putActivity = (data) => {
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
     })
-      .then((res) => res.json())
+      .then((res) =>
+        res.ok
+          ? Promise.resolve({
+              name: data.name,
+              status: res.status || "00",
+              statusText: `The activity was modified`,
+            })
+          : Promise.reject({
+              err: true,
+              status: res.status || "00",
+              statusText: "Error404",
+            })
+      )
       .then((data) => dispatch({ type: CONFIRM_ACTION, payload: data }))
       .catch((err) => console.log(err));
   };

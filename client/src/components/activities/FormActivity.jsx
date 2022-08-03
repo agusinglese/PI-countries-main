@@ -50,6 +50,11 @@ const UlTag = styled.ul`
   display: inline-block;
 `;
 
+const Error = styled.p`
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #dc3545;
+`;
 let style = {
   fontSize: "0.8rem",
   fontWeight: "bold",
@@ -122,7 +127,7 @@ function FormActivity({
                 />
               </div>
 
-              {errors.name && <p style={style}>{errors.name}</p>}
+              {errors.name && <Error>{errors.name}</Error>}
             </DivTag>
             <DivTag>
               <label>Duration (hrs): </label>
@@ -130,13 +135,13 @@ function FormActivity({
                 type="number"
                 name="duration"
                 min="1"
-                max="50"
+                max="20"
                 value={form.duration}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 required
               />
-              {errors.duration && <p style={style}>{errors.duration}</p>}
+              {errors.duration && <Error>{errors.duration}</Error>}
             </DivTag>
             <DivTag>
               <label>Difficulty: </label>
@@ -206,7 +211,7 @@ function FormActivity({
                   5
                 </label>
               </Div2Tag>
-              {errors.difficulty && <p style={style}>{errors.difficulty}</p>}
+              {errors.difficulty && <Error>{errors.difficulty}</Error>}
             </DivTag>
             <DivTag>
               <label>Season: </label>
@@ -223,7 +228,7 @@ function FormActivity({
                 <option value="Spring">Spring</option>
                 <option value="Fall">Fall</option>
               </select>
-              {errors.season && <p style={style}>{errors.season}</p>}
+              {errors.season && <Error>{errors.season}</Error>}
             </DivTag>
 
             <DivTag>

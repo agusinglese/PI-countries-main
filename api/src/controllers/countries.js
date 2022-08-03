@@ -51,11 +51,12 @@ const getByContinent = async (nameContinent) => {
   return selectCountry;
 };
 
-const getByActivity = async (idActivity) => {
+const getByActivity = async (nameActivity) => {
   let activity = await Activity.findAll({
-    where: { name: idActivity },
+    where: { name: nameActivity },
     include: { model: Country },
   });
+  console.log(activity[0].countries);
   let countriesByAct = activity[0].countries;
   return countriesByAct;
 };

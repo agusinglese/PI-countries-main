@@ -3,6 +3,7 @@ import { useState } from "react";
 export const usePaginated = (countries) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPage, setCountriesPage] = useState(10);
+
   const positionOfTheLastCountry = currentPage * countriesPage;
   const positionOfTheFirstCountry = positionOfTheLastCountry - countriesPage;
 

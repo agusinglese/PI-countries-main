@@ -7,11 +7,11 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
 
+  //Validaciones formulario
   const validateForm = (form) => {
     let errors = {};
     let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚú\s]+$/; //acepta letras y espacios, caracteres ajenos al ingles como la ñ
 
-    //por cada input, se tiene un if anidado
     if (!form.name.trim()) {
       errors.name = "The 'name' is required";
     } else if (!regexName.test(form.name.trim())) {
@@ -26,7 +26,7 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
     if (!form.difficulty) {
       errors.difficulty = "The 'difficulty' of the activity is required";
     } else if (form.difficulty < 1 || form.difficulty > 5) {
-      errors.difficulty = "The difficulty must be a value between 1 and 5";
+      errors.difficulty = "The 'difficulty' must be a value between 1 and 5";
     }
 
     if (!form.season) {
@@ -98,6 +98,7 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
     });
   };
 
+  //Seccion "countries" en el formulario
   const handleDelete = (country) => {
     setForm({
       ...form,
@@ -105,6 +106,7 @@ export const useForm = (initialForm, postActive, putActive, deleteActive) => {
     });
   };
 
+  //Envio formulario
   const sendData = (data) => {
     const { name, duration, season, difficulty, id, countries } = data;
     let nameCountries = countries.map((e) => e.name);

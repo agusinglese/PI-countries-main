@@ -1,7 +1,14 @@
 import React from "react";
-import "./Loader.css";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
+const Rotation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
 const Conteiner = styled.div`
   display: inline-block;
   position: relative;
@@ -18,11 +25,10 @@ const SubConteiner = styled.div`
   margin: 10px;
   border: 10px solid #000;
   border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  animation: ${Rotation} 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: #000 transparent transparent transparent;
 `;
 
-//loading.io --> loader animados
 const Loader = () => {
   return (
     <div>
