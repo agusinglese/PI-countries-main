@@ -26,7 +26,6 @@ function Home() {
   const dispatch = useDispatch();
   const [filterActive, setFilterActive] = useState(false);
   const [filter, setFilter] = useState({ continent: "All", activity: "All" });
-  const [loading, setLoading] = useState(true);
   const {
     positionOfTheFirstCountry,
     positionOfTheLastCountry,
@@ -51,7 +50,6 @@ function Home() {
 
   useEffect(() => {
     dispatch(getActivities());
-    setLoading(false);
   }, [dispatch]);
 
   const handleFilter = (e) => {
@@ -61,12 +59,10 @@ function Home() {
 
   //DESACTIVAR FILTROS
   const handleBack = () => {
-    setLoading(true);
     setFilterActive(false);
     dispatch(getActivities());
     setCurrentPage(1);
     setFilter({ ...filter, continent: "All", activity: "All" });
-    setLoading(false);
   };
 
   return (
@@ -81,17 +77,21 @@ function Home() {
           setFilterActive={setFilterActive}
         />
         <br />
-        {loading && <Loader />}
-        <Paginated
-          totalCountries={countries.length}
-          countriesPage={countriesPage}
-          pagine={pagine}
-          currentPage={currentPage}
-          prevHandler={prevHandler}
-          nextHandler={nextHandler}
-          firstHandler={firstHandler}
-          lastHandler={lastHandler}
-        />
+        {countries.length === 0 ? (
+          <Loader />
+        ) : (
+          <Paginated
+            totalCountries={countries.length}
+            countriesPage={countriesPage}
+            pagine={pagine}
+            currentPage={currentPage}
+            prevHandler={prevHandler}
+            nextHandler={nextHandler}
+            firstHandler={firstHandler}
+            lastHandler={lastHandler}
+          />
+        )}
+
         <div>
           {filterActive && <button onClick={() => handleBack()}>Back</button>}
           <DivTagCards>

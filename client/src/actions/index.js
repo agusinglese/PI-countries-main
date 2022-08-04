@@ -9,11 +9,12 @@ import {
   CONFIRM_ACTION,
   GET_ALL_COUNTRIES,
 } from "../types";
+import { urlBase } from "../index";
 
 //COUNTRIES
 export const getAllCountries = () => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/countries`)
+    return fetch(`${urlBase}/countries`)
       .then((res) =>
         res.ok
           ? res.json()
@@ -34,7 +35,7 @@ export const getAllCountries = () => {
 };
 export const searchByName = (name) => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/countries?name=${name}`)
+    return fetch(`${urlBase}/countries?name=${name}`)
       .then((res) =>
         res.ok
           ? res.json()
@@ -56,7 +57,7 @@ export const searchByName = (name) => {
 
 export const searchById = (id) => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/countries/${id}`)
+    return fetch(`${urlBase}/countries/${id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: SEARCH_COUNTRY_BY_ID, payload: data });
@@ -69,7 +70,7 @@ export const filterCountries = (filter) => {
   const { continent, activity } = filter;
   return function (dispatch) {
     return fetch(
-      `http://localhost:3001/countries/filter?continent=${continent}&activity=${activity}`
+      `${urlBase}/countries/filter?continent=${continent}&activity=${activity}`
     )
       .then((res) =>
         res.ok
@@ -102,7 +103,7 @@ export const orderByPopulation = (order) => ({
 //ACTIVITIES
 export const postActivity = (activity) => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/activities`, {
+    return fetch(`${urlBase}/activities`, {
       method: "POST",
       body: JSON.stringify(activity),
       headers: { "Content-Type": "application/json" },
@@ -123,7 +124,7 @@ export const postActivity = (activity) => {
 
 export const getActivities = () => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/activities`)
+    return fetch(`${urlBase}/activities`)
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: GET_ACTIVITIES, payload: data });
@@ -135,7 +136,7 @@ export const getActivities = () => {
 export const putActivity = (data) => {
   console.log(data);
   return function (dispatch) {
-    return fetch(`http://localhost:3001/activities/put`, {
+    return fetch(`${urlBase}/activities/put`, {
       method: "PUT",
       body: JSON.stringify(data),
       headers: { "Content-Type": "application/json" },
@@ -160,7 +161,7 @@ export const putActivity = (data) => {
 
 export const deleteActivity = (data) => {
   return function (dispatch) {
-    return fetch(`http://localhost:3001/activities/delete/${data.id}`, {
+    return fetch(`${urlBase}/activities/delete/${data.id}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     })
