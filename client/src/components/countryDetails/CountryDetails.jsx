@@ -134,6 +134,10 @@ function CountryDetails() {
                   <span>{data.continent ? data.continent : `Not found`}</span>
                 </SubTags>
                 <SubTags>
+                  <Tags>Timezones : </Tags>
+                  <span>{data.timezones ? data.timezones : `Not found`}</span>
+                </SubTags>
+                <SubTags>
                   <Tags>Subregion : </Tags>
                   <span>{data.subregion ? data.subregion : `Not found`}</span>
                 </SubTags>

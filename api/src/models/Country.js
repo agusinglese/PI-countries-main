@@ -17,6 +17,7 @@ module.exports = (sequelize) => {
       subregion: { type: DataTypes.STRING },
       area: { type: DataTypes.STRING },
       population: { type: DataTypes.INTEGER },
+      timezones: { type: DataTypes.STRING },
     },
     { timestamps: false }
   );

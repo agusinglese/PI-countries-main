@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const router = Router();
-const { Activity, Country } = require("../db.js");
+const { Activity, Country, country_activity } = require("../db.js");
 
 router.post("/", async (req, res) => {
   const { name, difficulty, season, duration, countries } = req.body;
@@ -26,6 +26,7 @@ router.post("/", async (req, res) => {
           let searchCountry = await Country.findAll({
             where: { name: country },
           });
+
           await newActivity.setCountries(searchCountry);
         });
       }
@@ -55,14 +56,25 @@ router.put("/put", async (req, res) => {
       { name, duration, season, difficulty },
       { where: { id } }
     );
-    const activity = await Activity.findOne({ where: { id } });
-    await activity.removeCountries([]);
-    countries.forEach(async (country) => {
-      const countryAdd = await Country.findAll({ where: { name: country } });
-      activity.setCountries(countryAdd);
-    });
 
-    res.status(200).send(`The activity ${name} was modified`);
+    if (countries.length > 0) {
+      const activity = await Activity.findOne({
+        where: { id },
+        include: { model: Country },
+      });
+      await country_activity.destroy({ where: { activityId: id } });
+      countries.forEach(async (country) => {
+        let searchCountry = await Country.findAll({
+          where: { name: country },
+        });
+
+        await activity.addCountries(searchCountry, {
+          through: country_activity,
+        });
+      });
+    }
+
+    res.status(200).send("OK");
   } catch (e) {
     res.send(e);
   }
@@ -76,6 +88,10 @@ router.delete("/delete/:id", async (req, res) => {
   } catch (e) {
     res.send(e);
   }
+});
+
+router.get("/relacion", async (req, res) => {
+  res.send(await country_activity.findAll());
 });
 
 module.exports = router;

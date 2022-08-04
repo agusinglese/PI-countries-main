@@ -26,10 +26,3 @@ conn.sync({ force: false }).then(() => {
     console.log("%s listening at 3001"); // eslint-disable-line no-console
   });
 });
-
-/*
-models --> se comunica con la base de datos
-rutas --> es la puerta de entrada de la api
-las rutas tienen que llamar a un controlador
-controller --> intermediario entre rutas y base de datos
-*/

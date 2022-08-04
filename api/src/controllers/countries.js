@@ -20,6 +20,7 @@ const getAPI = async () => {
       subregion: e.subregion,
       area: e.area,
       population: e.population,
+      timezones: e.timezones ? e.timezones[0] : "Not found",
     };
   });
   await Country.bulkCreate(newCountries);
