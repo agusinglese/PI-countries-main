@@ -43,12 +43,12 @@ function ErrorMessage() {
         <p>{error.statusText}</p>
 
         {pathname === "/home" && (
-          <A href={`${urlBase}/home`}>
+          <A href={`https://pi-countries-main-iota.vercel.app/home`}>
             <button>Close</button>
           </A>
         )}
         {pathname === "/activities" && (
-          <A href={`${urlBase}/activities`}>
+          <A href={`https://pi-countries-main-iota.vercel.app/activities`}>
             <button>Close</button>
           </A>
         )}

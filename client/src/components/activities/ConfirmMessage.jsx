@@ -39,7 +39,7 @@ function ConfirmMessage({ putActive, deleteActive, postActive }) {
         <h4>
           The activity {msg.name} was successfully {action}!
         </h4>
-        <A href={`${urlBase}/activities`}>
+        <A href={`https://pi-countries-main-iota.vercel.app/activities`}>
           <button>Close</button>
         </A>
       </Content>
