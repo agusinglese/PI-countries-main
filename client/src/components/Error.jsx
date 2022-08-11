@@ -1,6 +1,5 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { urlBase } from "../index";
 
 const ErrorStyled = styled.div`
   height: 80vh;
@@ -30,13 +29,15 @@ function Error() {
       <DivTag>
         <H3>Error 404: Page not found</H3>
         <p>
-          {`The URL`} <b>{`${urlBase}${pathname}`}</b> {`doesn't exist`}
+          {`The URL`}{" "}
+          <b>{`https://pi-countries-main-iota.vercel.app/${pathname}`}</b>{" "}
+          {`doesn't exist`}
         </p>
         <br />
         <br />
-        <Link to="/">
+        <a href="https://pi-countries-main-iota.vercel.app">
           <button>Back to home page</button>
-        </Link>
+        </a>
       </DivTag>
     </ErrorStyled>
   );
