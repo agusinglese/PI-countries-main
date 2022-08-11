@@ -14,7 +14,7 @@ const getAPI = async () => {
     return {
       id: e.cca3,
       name: e.name.common,
-      flag: e.flags.png,
+      flag: e.flags.svg,
       continent: e.continents[0],
       capital: e.capital ? e.capital[0] : "Not available",
       subregion: e.subregion,

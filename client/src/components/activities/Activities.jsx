@@ -130,7 +130,7 @@ function Activities() {
             false
           )}
         </div>
-        {loading && <Loader />}
+        {activities.length === 0 ? <Loader /> : false}
         {(postActive || putActive || deleteActive) && (
           <FormActivity
             handleBlur={handleBlur}
