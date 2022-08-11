@@ -8,7 +8,6 @@ const HeaderStyle = styled.div`
   position: absolute;
   align-items: center;
   z-index: 1;
-
   width: 100%;
 `;
 
@@ -21,6 +20,19 @@ const Img = styled.img`
   width: auto;
   margin: 1rem;
   z-index: 1;
+
+  @media only screen and (max-width: 575px) {
+    height: 7vh;
+    width: fit-content;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    height: 9vh;
+    width: fit-content;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    height: 10vh;
+    width: fit-content;
+  } ;
 `;
 
 function Header({ pathname }) {

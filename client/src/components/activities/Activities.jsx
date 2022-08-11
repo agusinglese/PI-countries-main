@@ -42,11 +42,41 @@ const SubConteiner = styled.div`
   box-shadow: 2px 4px 1px #2ba1a3;
   border-bottom-left-radius: 8rem;
   border-bottom-right-radius: 8rem;
-  padding-top: 15vh;
+  padding-top: 10vh;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem;
+
+  @media only screen and (max-width: 575px) {
+    padding-top: 5rem;
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    padding-top: 5rem;
+    border-bottom-left-radius: 6rem;
+    border-bottom-right-radius: 6rem;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    padding-top: 13rem;
+    border-bottom-left-radius: 8rem;
+    border-bottom-right-radius: 8rem;
+  } ;
 `;
 
+const H1 = styled.h1`
+  margin-top: 5rem;
+  padding-bottom: 0.5rem;
+
+  @media only screen and (max-width: 575px) {
+    margin-top: 3rem;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    margin-top: 1rem;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    margin-top: 0;
+  } ;
+`;
 function Activities() {
   const { pathname } = useLocation();
   const { activities, msgError, msgConfirm } = useSelector((state) => state);
@@ -104,9 +134,9 @@ function Activities() {
 
         <SubConteiner>
           {activities.length ? (
-            <h1>TOURIST ACTIVITIES</h1>
+            <H1>TOURIST ACTIVITIES</H1>
           ) : (
-            <h1>Activities not found</h1>
+            <H1>Activities not found</H1>
           )}
         </SubConteiner>
         <div>
@@ -130,7 +160,6 @@ function Activities() {
             false
           )}
         </div>
-        {activities.length === 0 ? <Loader /> : false}
         {(postActive || putActive || deleteActive) && (
           <FormActivity
             handleBlur={handleBlur}

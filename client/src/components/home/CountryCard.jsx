@@ -16,6 +16,19 @@ const DivTag = styled.div`
   &:hover {
     background-color: #ffe0b2;
   }
+
+  @media only screen and (max-width: 575px) {
+    width: 250px;
+    height: 35vh;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    width: 250px;
+    height: 40vh;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    width: 250px;
+    height: 30vh;
+  } ;
 `;
 
 const ImgTag = styled.img`

@@ -4,6 +4,10 @@ const UlTag = styled.ul`
   display: inline;
   padding: 0;
   margin: 0 1rem;
+
+  @media only screen and (max-width: 575px) {
+    margin: 0 0.5rem;
+  }
 `;
 
 const LiTag = styled.li`
@@ -16,6 +20,10 @@ const LiTag = styled.li`
   cursor: pointer;
   background-color: ${(props) => props.bgcolor};
   border: 1px solid gray;
+
+  @media only screen and (max-width: 575px) {
+    padding: 8px 7px;
+  }
 `;
 
 const Buttons = styled.button`

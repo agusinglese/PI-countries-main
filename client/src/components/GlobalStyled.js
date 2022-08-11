@@ -21,8 +21,8 @@ body {
     background-color: #005f73;
     min-height: 100vh;
     padding-bottom: 3rem;
-    
   }
+
 button, input[type="submit"] {
   border: thin solid #f8e16c;
   border-radius: 0.5rem;
@@ -40,6 +40,7 @@ button, input[type="submit"] {
   cursor: pointer;
   color: #263238;
   box-shadow: 1px 1px 1px 1px #B39E32;
+
 }
 
 
@@ -59,6 +60,11 @@ select {
   line-height: 1;
   background-color: whitesmoke;
   cursor: pointer;
+
+  @media only screen and (max-width: 575px) {
+    width: 70vw;
+  }
+  
 }
 
 input[type="text"],input[type="number"]{
@@ -72,6 +78,10 @@ input[type="text"],input[type="number"]{
   line-height: 1;
   background-color: whitesmoke;
   color: #263238;
+
+  @media only screen and (max-width: 575px) {
+    width: 70vw;
+  }
 }
 input[type="radio"] {
   border: thin solid #dedede;
@@ -87,19 +97,38 @@ label{
   margin: 0.5rem;
   text-align: center;
   vertical-align: middle;
-  font-weight: bold;
-  
+  font-weight: bold; 
 }
 
 h1 {
   font-weight: bold;
-  font-size: calc(4em + 1vw);
-  margin-top: 0;
+  font-size: 5rem;
+  margin-top: 5rem;
   margin-left:15rem;
   margin-right: 15rem;
   letter-spacing: 3px;
   font-style: oblique;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+  @media only screen and (max-width: 575px) {
+    font-size: 2.5rem;
+    margin-top: 8rem;
+    margin-left: 0;
+    margin-right:0;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    font-size: 4rem;
+    margin-top: 9rem;
+    margin-left: 0;
+    margin-right:0;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    font-size: 6rem;
+    margin-top: 12rem;
+    margin-left: 0;
+    margin-right:0;
+  } ;
+
 }
 
 legend{

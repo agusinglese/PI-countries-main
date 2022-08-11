@@ -14,6 +14,17 @@ const Conjunto = styled.div`
   flex-direction: column;
   width: 50vw;
   box-shadow: 1px 1px 3px 1px;
+
+  @media only screen and (max-width: 575px) {
+    width: 90vw;
+    margin: 0 5vw;
+    margin-bottom: 3vh;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    width: 70vw;
+    margin: 0 15vw;
+    margin-bottom: 3vh;
+  } ;
 `;
 
 const DivTag = styled.div`
@@ -22,10 +33,32 @@ const DivTag = styled.div`
   padding: 0.1rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+
+  @media only screen and (max-width: 575px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  }
 `;
 
 const Div2Tag = styled.form`
   width: 20vw;
+  @media only screen and (max-width: 575px) {
+    width: 90%;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    width: 70%;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    width: 70%;
+  }
 `;
 
 const LiTag = styled.li`

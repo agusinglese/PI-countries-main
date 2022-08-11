@@ -17,6 +17,9 @@ const StartButton = styled.button`
     background-color: whitesmoke;
     padding-right: 25px;
   }
+  @media (max-width: 800px) {
+    margin: 5rem;
+  }
 `;
 const Span = styled.span`
   cursor: pointer;
@@ -40,11 +43,28 @@ const Conteiner = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-image: url(https://img.freepik.com/fotos-premium/planeta-abstracto-sobre-fondo-banderas-mundo_476363-2635.jpg?w=2000);
+
+  @media (max-width: 1000px) {
+    justify-content: space-around;
+  }
 `;
 
 const Img = styled.img`
-  height: 25vh;
+  height: 10rem;
   width: auto;
+
+  @media only screen and (max-width: 575px) {
+    height: 4rem;
+    width: fit-content;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    height: 5rem;
+    width: fit-content;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    height: 8rem;
+    width: fit-content;
+  } ;
 `;
 
 function LandingPage() {

@@ -10,10 +10,23 @@ const DivTagCards = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-evenly;
+
+  @media only screen and (max-width: 575px) {
+    flex-direction: column;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    flex-direction: column;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  } ;
 `;
 
 const SubConteiner = styled.div`
   width: 45vw;
+  @media only screen and (max-width: 575px) {
+    width: 90%;
+    margin-top: 1.5rem;
+  }
 `;
 
 const Conteiner = styled.div`
@@ -21,7 +34,20 @@ const Conteiner = styled.div`
   box-shadow: 2px 4px 1px #2ba1a3;
   border-bottom-left-radius: 8rem;
   border-bottom-right-radius: 8rem;
+  @media only screen and (max-width: 575px) {
+    border-bottom-left-radius: 4rem;
+    border-bottom-right-radius: 4rem;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    border-bottom-left-radius: 6rem;
+    border-bottom-right-radius: 6rem;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    border-bottom-left-radius: 8rem;
+    border-bottom-right-radius: 8rem;
+  } ;
 `;
+
 function NavBar({ setFilterActive, setCurrentPage, filter, handleFilter }) {
   const activities = useSelector((state) => state.activities);
   const dispatch = useDispatch();
@@ -47,9 +73,6 @@ function NavBar({ setFilterActive, setCurrentPage, filter, handleFilter }) {
 
   return (
     <Conteiner>
-      <br />
-      <br />
-      <br />
       <br />
       <h1>COUNTRIES</h1>
       <div>
