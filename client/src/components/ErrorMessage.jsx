@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { urlBase } from "../index";
 
 const Div = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
@@ -42,12 +43,12 @@ function ErrorMessage() {
         <p>{error.statusText}</p>
 
         {pathname === "/home" && (
-          <A href="http://localhost:3000/home">
+          <A href={`${urlBase}/home`}>
             <button>Close</button>
           </A>
         )}
         {pathname === "/activities" && (
-          <A href="http://localhost:3000/activities">
+          <A href={`${urlBase}/activities`}>
             <button>Close</button>
           </A>
         )}

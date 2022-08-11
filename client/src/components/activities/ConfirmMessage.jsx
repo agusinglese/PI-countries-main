@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
+import { urlBase } from "../index";
 
 const Div = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
@@ -38,7 +39,7 @@ function ConfirmMessage({ putActive, deleteActive, postActive }) {
         <h4>
           The activity {msg.name} was successfully {action}!
         </h4>
-        <A href="http://localhost:3000/activities">
+        <A href={`${urlBase}/activities`}>
           <button>Close</button>
         </A>
       </Content>
