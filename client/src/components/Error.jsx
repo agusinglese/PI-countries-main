@@ -1,5 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { urlBase } from "../index";
 
 const ErrorStyled = styled.div`
   height: 80vh;
@@ -29,8 +30,7 @@ function Error() {
       <DivTag>
         <H3>Error 404: Page not found</H3>
         <p>
-          {`The URL`} <b>{`http://localhost:3000${pathname}`}</b>{" "}
-          {`doesn't exist`}
+          {`The URL`} <b>{`${urlBase}${pathname}`}</b> {`doesn't exist`}
         </p>
         <br />
         <br />

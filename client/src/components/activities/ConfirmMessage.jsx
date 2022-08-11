@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
-import { urlBase } from "../index";
+import { urlBase } from "../../index.js";
 
 const Div = styled.div`
   background-color: rgba(0, 0, 0, 0.8);

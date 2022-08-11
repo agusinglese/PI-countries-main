@@ -39,7 +39,7 @@ function SearchBar({ setFilterActive }) {
       />
       <Button type="submit" onClick={handleSearch}>
         <Img
-          src="https://cdn-icons.flaticon.com/png/128/3249/premium/3249897.png?token=exp=1658973231~hmac=9c04370eb1de4b6bb3b245cd7a01baa0"
+          src="https://cdn-icons-png.flaticon.com/128/694/694985.png"
           alt="search"
         />
       </Button>
