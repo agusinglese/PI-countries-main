@@ -30,7 +30,7 @@ function Error() {
         <H3>Error 404: Page not found</H3>
         <p>
           {`The URL`}{" "}
-          <b>{`https://pi-countries-main-iota.vercel.app/${pathname}`}</b>{" "}
+          <b>{`https://pi-countries-main-iota.vercel.app${pathname}`}</b>{" "}
           {`doesn't exist`}
         </p>
         <br />
