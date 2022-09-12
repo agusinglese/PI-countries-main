@@ -7,32 +7,30 @@ const StartButton = styled.button`
   margin-left: 5rem;
   transition: all 0.5s;
   cursor: pointer;
-  font-size: 80px;
-  text-align: center;
+  text-align: end;
   box-shadow: none;
   border: none;
 
   &:hover {
-    border-radius: 8rem;
-    background-color: whitesmoke;
-    padding-right: 25px;
+    box-shadow: 2px 4px 10px 4px #94d2bd;
+    background-color: transparent;
   }
   @media (max-width: 800px) {
     margin: 5rem;
   }
 `;
-const Span = styled.span`
+const P = styled.p`
   cursor: pointer;
-  display: inline-block;
-  position: relative;
+  text-align: end;
   transition: 0.5s;
-  color: transparent;
-  text-align: center;
+  color: black;
+  padding-right: 3rem;
+  font-size: 2rem;
+  margin: 0;
 
   &:hover {
     //background-color: whitesmoke;
-    padding-right: 25px;
-    color: black;
+    color: #2ba1a3;
   }
 `;
 const Conteiner = styled.div`
@@ -53,17 +51,22 @@ const Img = styled.img`
   height: 10rem;
   width: auto;
 
-  @media only screen and (max-width: 575px) {
-    height: 4rem;
-    width: fit-content;
-  }
-  @media only screen and (min-width: 576px) and (max-width: 767px) {
+  @media only screen and (max-width: 300px) {
     height: 5rem;
     width: fit-content;
   }
-  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  @media only screen and (min-width: 301px) and (max-width: 575px) {
+    height: 7rem;
+    width: fit-content;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
     height: 8rem;
     width: fit-content;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    height: 10rem;
+    width: fit-content;
+    margin-left: 0;
   } ;
 `;
 
@@ -72,10 +75,8 @@ function LandingPage() {
     <Conteiner>
       <NavLink to="/home">
         <StartButton>
-          <Span>
-            <Img src="icon.png" alt="logo" />
-            🡆
-          </Span>
+          <Img src="icon.png" alt="logo" />
+          <P> 🡆</P>
         </StartButton>
       </NavLink>
     </Conteiner>

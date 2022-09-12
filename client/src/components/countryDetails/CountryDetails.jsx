@@ -11,6 +11,14 @@ const Conteiner = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin-left: 2rem;
+
+  @media only screen and (max-width: 575px) {
+    margin: 1rem;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  } ;
 `;
 
 const Layout = styled.div`
@@ -18,6 +26,12 @@ const Layout = styled.div`
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
+  @media only screen and (max-width: 575px) {
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  }
 `;
 const SubConteiner = styled(Layout)`
   margin: 0 20vw;
@@ -46,6 +60,14 @@ const Img = styled.img`
   padding: 5px;
   width: 100%;
   box-shadow: 1px 1px gray;
+
+  @media only screen and (max-width: 575px) {
+    width: 90%;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+  }
 `;
 
 const Title = styled.h1`
@@ -53,6 +75,15 @@ const Title = styled.h1`
   margin: 1rem 0 0 0;
   border: none;
   font-size: calc(1vw + 2em);
+  @media only screen and (max-width: 575px) {
+    font-size: 1.5rem;
+  }
+  @media only screen and (min-width: 576px) and (max-width: 767px) {
+    font-size: 2rem;
+  }
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const Background = styled.div`
@@ -60,8 +91,18 @@ const Background = styled.div`
   margin-left: 20vw;
   width: 60vw;
   border-radius: 1rem;
-  margin-top: 0;
+  margin-top: 5rem;
   box-shadow: 1px 1px 3px 1px;
+
+  @media only screen and (max-width: 575px) {
+    width: 80%;
+    margin-left: 10%;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    width: 80%;
+    margin-left: 10%;
+  }
 `;
 
 const ActTitle = styled.h3`
@@ -72,6 +113,15 @@ const ActTitle = styled.h3`
   width: 60vw;
   letter-spacing: 3px;
   box-shadow: 1px 1px 3px 1px;
+  @media only screen and (max-width: 575px) {
+    width: 80%;
+    margin: 1rem 10% 0.1rem 10%;
+  }
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) {
+    width: 80%;
+    margin: 1rem 10% 0.1rem 10%;
+  }
 `;
 
 function CountryDetails() {

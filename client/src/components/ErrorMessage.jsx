@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { urlBase } from "../index";
 
 const Div = styled.div`
   background-color: rgba(0, 0, 0, 0.8);
